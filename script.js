@@ -151,9 +151,38 @@ function carregar(){
             <h3>${p.nome}</h3>
             <p>${p.descricao}</p>
             <strong>R$ ${p.preco}</strong><br><br>
-            ${modo === "painel"
+
+            ${
+                modo === "painel"
                 ? `<button onclick="excluirProduto(${i})">Excluir</button>`
-                : `<button onclick="addCarrinho(${i})">Adicionar</button>`}
+                : `
+                <button onclick="comprarAgora(${i})" style="
+                    width:100%;
+                    margin-bottom:8px;
+                    background: linear-gradient(90deg, #00ffcc, #7a2bff);
+                    border:none;
+                    padding:10px;
+                    border-radius:10px;
+                    cursor:pointer;
+                    font-weight:600;
+                ">
+                    Comprar
+                </button>
+
+                <button onclick="addCarrinho(${i})" style="
+                    width:100%;
+                    background: transparent;
+                    border:1px solid #7a2bff;
+                    padding:10px;
+                    border-radius:10px;
+                    cursor:pointer;
+                    color:#caa8ff;
+                ">
+                    Adicionar ao carrinho
+                </button>
+                `
+            }
+
         </div>`;
     });
 }
@@ -169,9 +198,51 @@ function addCarrinho(i){
     document.getElementById("qtd").innerText = carrinho.length;
 }
 
+
+function comprarAgora(i){
+    let p = listaProdutos[i];
+
+    let numero = "5543999002434";
+
+    let mensagem = `
+Angelical - Pedido
+
+Produto: ${p.nome}
+Preço: R$ ${p.preco}
+Descricao: ${p.descricao}
+
+Quero finalizar a compra
+`;
+
+    let link = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensagem)}`;
+
+    window.open(link, "_blank");
+}
+
 function finalizarCompra(){
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    window.location.href = "checkout.html";
+    let numero = "5543999002434";
+
+    if(carrinho.length === 0){
+        alert("Carrinho vazio");
+        return;
+    }
+
+    let mensagem = "🛍️ Pedido - Angelical\n\n";
+
+    carrinho.forEach((p, i) => {
+        mensagem += `Produto ${i+1}:\n`;
+        mensagem += `📦 ${p.nome}\n`;
+        mensagem += `💰 R$ ${p.preco}\n\n`;
+    });
+
+    let total = carrinho.reduce((soma, p) => soma + p.preco, 0);
+
+    mensagem += `💵 Total: R$ ${total.toFixed(2)}\n\n`;
+    mensagem += "Quero finalizar a compra!";
+
+    let link = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensagem)}`;
+
+    window.open(link, "_blank");
 }
 
 
