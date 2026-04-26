@@ -5,6 +5,23 @@ body {
     color: white;
 }
 
+.box-login h3 {
+    text-align: center;
+    font-size: 22px;
+    color: #f3c6ff;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.sub {
+    text-align: center;
+    font-size: 14px;
+    color: #caa8ff;
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
+
+
 .oculto { display: none !important; }
 
 html { scroll-behavior: smooth; }
@@ -36,7 +53,19 @@ html { scroll-behavior: smooth; }
     text-align: center;
 }
 
-.box-login img { width: 140px; margin-bottom: 15px; }
+.box-login img {
+    width: 240px; /* aumenta aqui */
+    display: block;
+    margin: 0 auto 15px auto;
+
+    filter: drop-shadow(0 0 15px rgba(255, 180, 255, 0.4));
+    transition: 0.3s;
+}
+
+.box-login img:hover {
+    transform: scale(1.05);
+}
+
 
 .box-login input {
     width: 100%;
@@ -204,6 +233,14 @@ header {
     position: relative;
 }
 
+/* botão fechar */
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
 
     /* 📱 PRODUTOS */
@@ -257,12 +294,4 @@ header {
         right: 20px;
     }
 
-}
-
-/* botão fechar */
-.fechar {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    cursor: pointer;
 }
