@@ -71,11 +71,16 @@ function loginInicial(){
 
     if(usuarios[email] && usuarios[email] === senha){
         usuario = email;
+
+        // ✅ SALVA LOGIN
+        localStorage.setItem("usuarioLogado", email);
+
         entrarSistema();
     } else {
         alert("Email ou senha inválidos");
     }
 }
+
 
 function cadastroInicial(){
     codigoGerado = Math.floor(100000 + Math.random() * 900000);
@@ -87,10 +92,16 @@ function validarCodigoInicial(){
     let senha = document.getElementById("senhaInicial").value;
 
     if(document.getElementById("codigoInput").value == codigoGerado){
+        
         usuarios[email] = senha;
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+        // ✅ SALVA LOGIN AUTOMÁTICO
+        localStorage.setItem("usuarioLogado", email);
+
         usuario = email;
         entrarSistema();
+
     } else {
         alert("Código incorreto");
     }
@@ -110,6 +121,15 @@ function entrarSistema(){
 
     modoLoja();
 }
+
+
+
+function sair(){
+    localStorage.removeItem("usuarioLogado");
+    location.reload();
+}
+
+
 
 /* MENU */
 function toggleMenu(){
@@ -322,8 +342,16 @@ function fecharCarrinho(){
     document.getElementById("carrinhoBox").style.display = "none";
 }
 
-/* DEBUG */
 window.onload = function(){
-    carregar();
+
+    let salvo = localStorage.getItem("usuarioLogado");
+
+    if(salvo){
+        usuario = salvo;
+        entrarSistema(); // entra direto 🔥
+    } else {
+        carregar(); // carrega normal
+    }
+
     console.log("Sistema carregado corretamente");
 }
