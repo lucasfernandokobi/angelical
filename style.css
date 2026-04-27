@@ -117,8 +117,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 100px 20px 20px;
-    min-height: auto;
+    padding: 40px 20px;
 }
 
 .produto {
@@ -215,24 +214,27 @@ header {
 
     display: none;
 
-    /* centralização */
     justify-content: center;
     align-items: center;
 
     z-index: 9999;
 }
 
+  
 .modal-box {
     background: #140a2e;
     padding: 20px;
     border-radius: 15px;
     width: 320px;
     max-height: 90vh;
-
     overflow-y: auto;
 
     position: relative;
+
+    margin: auto; /* 🔥 isso ajuda */
 }
+
+
 
 /* botão fechar */
 .fechar {
