@@ -10,7 +10,7 @@ if(!usuarios["lucaskobi30@gmail.com"]){
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 }
 
-let listaProdutos = [];
+let listaProdutos = JSON.parse(localStorage.getItem("produtos")) || [];
 let carrinho = [];
 
 function abrirModal(){
@@ -42,6 +42,8 @@ function salvar(){
                 descricao,
                 imagens: [e.target.result]
             });
+
+        localStorage.setItem("produtos", JSON.stringify(listaProdutos));
 
             fecharModal();
             carregar();
@@ -189,8 +191,12 @@ function carregar(){
 
 function excluirProduto(i){
     listaProdutos.splice(i,1);
+
+    localStorage.setItem("produtos", JSON.stringify(listaProdutos));
+
     carregar();
 }
+
 
 /* CARRINHO */
 function addCarrinho(i){
@@ -318,5 +324,6 @@ function fecharCarrinho(){
 
 /* DEBUG */
 window.onload = function(){
+    carregar();
     console.log("Sistema carregado corretamente");
 }
