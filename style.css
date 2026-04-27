@@ -153,18 +153,14 @@ header {
 }
 
 .produto img {
+  .produto img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: 220px;
+    object-fit: contain; /* 🔥 mostra a imagem inteira */
     object-position: center;
+    background: #fff; /* fundo branco pra não ficar estranho */
     border-radius: 10px;
-    transition: transform 0.3s;
 }
-
-.produto img:hover {
-    transform: scale(1.05);
-}
-
 
 /* BOTÕES */
 .btn-add {
